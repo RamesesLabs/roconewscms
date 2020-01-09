@@ -2,49 +2,45 @@
 
 @section('content')
 
-<div class="container">
-    <div class="card text-center">
-        <div class="card-header">
-          Create a New Category
-        </div>
-        <div class="card-body">
-            <form>
-                <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="name" class="form-control" id="name" placeholder="John Doe">
-                </div>
-                <div class="form-group">
-                  <label for="email">Name</label>
-                  <input type="email" class="form-control" id="email" placeholder="name@example.com">
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Example select</label>
-                  <select class="form-control" id="exampleFormControlSelect1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlSelect2">Example multiple select</label>
-                  <select multiple class="form-control" id="exampleFormControlSelect2">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlTextarea1">Example textarea</label>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-              </form>
-        </div>
+<div class="card card-default">
+    <div class="card-header">
+        Create a Post
+    </div>
+
+    <div class="card-body">
+        <form action="{{ route('posts.store') }}" method="POST">
+
+            @csrf
+
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" name="title" id="title">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" cols="5" rows="5" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea name="content" id="content" cols="5" rows="5" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="published_at">Published At</label>
+                <input type="text" class="form-control" name="published_at" id="published_at">
+            </div>
+            <div class="form-group">
+                <label for="image">Upload Image</label>
+                <input type="file" class="form-control" name="image" id="image">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">
+                    Create Post
+                </button>
+            </div>
+
+        </form>
     </div>
 </div>
-
 
 @endsection
