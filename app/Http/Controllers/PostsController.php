@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
+use App\Http\Requests\Posts\CreatePostsRequest;
+use App\Post;
 class PostsController extends Controller
 {
     /**
@@ -13,9 +12,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view('posts.index');
+        return view('posts.index')->with('posts', Post::all());
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -25,18 +23,28 @@ class PostsController extends Controller
     {
         return view('posts.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePostsRequest $request)
     {
-        //
+        // upload the image to storage
+        $image = $request->image->store('posts');
+        // create the post
+        Post::create([
+          'title' => $request->title,
+          'description' => $request->description,
+          'content' => $request->content,
+          'image' => $image
+        ]);
+        // flash message
+        session()->flash('success', 'Post created successfully.');
+        // redirect user
+        return redirect(route('posts.index'));
     }
-
     /**
      * Display the specified resource.
      *
@@ -47,7 +55,6 @@ class PostsController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -58,7 +65,6 @@ class PostsController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -70,7 +76,6 @@ class PostsController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *

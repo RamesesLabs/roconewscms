@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -14,14 +14,14 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -73,41 +73,35 @@
         </nav>
 
         <main class="py-4">
-            <div class="container">
-                @if(session()->has('success'))
+            @auth
+              <div class="container">
+                  @if(session()->has('success'))
                     <div class="alert alert-success">
-                        {{ session()->get('success') }}
+                      {{ session()->get('success') }}
                     </div>
-                @endif
-            </div>
-           @auth
-            <div class="container">
-                <div class="row">
+                  @endif
+                  <div class="row">
                     <div class="col-md-4">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <a href="{{ route('posts.index') }}">Posts</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{ route('categories.index') }}">Categories</a>
-                            </li>
-                        </ul>
+                      <ul class="list-group">
+                        <li class="list-group-item">
+                          <a href="{{ route('posts.index') }}">Posts</a>
+                        </li>
+                        <li class="list-group-item">
+                          <a href="{{ route('categories.index') }}">Categories</a>
+                        </li>
+                      </ul>
                     </div>
                     <div class="col-md-8">
                         @yield('content')
                     </div>
-                </div>
-            </div>
-           @else
-                @yield('content')
-           @endauth
+                  </div>
+              </div>
+            @else
+              @yield('content')
+            @endauth
         </main>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
     @yield('scripts')
-
 </body>
 </html>
