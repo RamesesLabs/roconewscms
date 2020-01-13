@@ -8,11 +8,11 @@
 
   <div class="card-body">
     <form action="{{ isset($post) ? route('posts.update', $post->id) : route('posts.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
+      @csrf
 
-        @if(isset($post))
-          @method('PUT')
-        @endif
+      @if(isset($post))
+        @method('PUT')
+      @endif
 
       <div class="form-group">
         <label for="title">Title</label>
@@ -21,17 +21,16 @@
 
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea name="description" id="description" cols="5" rows="5" class="form-control">{{ isset($post) ? $post->description: '' }}</textarea>
+        <textarea name="description" id="description" cols="5" rows="5" class="form-control">{{ isset($post) ? $post->description : '' }}</textarea>
       </div>
       <div class="form-group">
         <label for="content">Content</label>
-
-        <input id="content" type="hidden" name="content" value="{{ isset($post) ? $post->content: '' }}">
+      <input id="content" type="hidden" name="content" value="{{ isset($post) ? $post->content : '' }}">
         <trix-editor input="content"></trix-editor>
       </div>
       <div class="form-group">
         <label for="published_at">Pubished At</label>
-        <input type="text" class="form-control" name="published_at" id='published_at' value="{{ isset($post) ? $post->published_at: '' }}">
+        <input type="text" class="form-control" name="published_at" id='published_at' value="{{ isset($post) ? $post->published_at : '' }}">
       </div>
       @if(isset($post))
         <div class="form-group">
@@ -44,8 +43,25 @@
       </div>
 
       <div class="form-group">
+        <label for="category">Category</label>
+        <select name="category" id="category" class="form-control">
+          @foreach($categories as $category)
+            <option value="{{ $category->id }}"
+                @if(isset($post))
+                  @if($category->id === $post->category_id)
+                    selected
+                  @endif
+                @endif
+              >
+              {{ $category->name }}
+            </option>
+          @endforeach
+        </select>
+      </div>
+
+      <div class="form-group">
         <button type="submit" class="btn btn-success">
-          {{ isset($post) ? 'Edit Post' : 'Create Post' }}
+          {{ isset($post) ? 'Update Post': 'Create Post' }}
         </button>
       </div>
     </form>
@@ -54,20 +70,16 @@
 @endsection
 
 @section('scripts')
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.0.0/trix.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
     flatpickr('#published_at', {
-        enableTime: true
-      })
-</script>
-
+      enableTime: true
+    })
+  </script>
 @endsection
 
 @section('css')
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.0.0/trix.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 @endsection

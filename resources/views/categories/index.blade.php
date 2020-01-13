@@ -12,21 +12,25 @@
 
     <table class="table table-dark">
         <thead>
-          <th>Name</th>
           <th></th>
+          <th>Name</th>
+          <th>Posts Count</th>
         </thead>
 
         <tbody>
           @foreach($categories as $category)
             <tr>
               <td>
-                {{ $category->name }}
-              </td>
-              <td>
                 <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info btn-sm">
                   Edit
                 </a>
                 <button class="btn btn-danger btn-sm" onclick="handleDelete({{ $category->id }})">Delete</button>
+              </td>
+              <td>
+                {{ $category->name }}
+              </td>
+              <td>
+                  {{ $category->posts->count() }}
               </td>
             </tr>
           @endforeach

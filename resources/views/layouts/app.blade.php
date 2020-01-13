@@ -83,6 +83,11 @@
                       {{ session()->get('success') }}
                     </div>
                   @endif
+                  @if(session()->has('error'))
+                    <div class="alert alert-danger">
+                      {{ session()->get('error') }}
+                    </div>
+                  @endif
                   <div class="row">
                     <div class="col-md-4">
                       <ul class="list-group">
@@ -93,7 +98,7 @@
                           <a href="{{ route('categories.index') }}">Categories</a>
                         </li>
                       </ul>
-                      <ul class="list-group">
+                      <ul class="list-group pt-2">
                         <li class="list-group-item">
                           <a href="{{ route('trashed-posts.index') }}">Trashed Posts</a>
                         </li>
