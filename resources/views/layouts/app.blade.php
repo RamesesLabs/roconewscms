@@ -34,7 +34,8 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                    <!-- Left Side Of Navbar
+                    TODO: Add better functionality to Navigation -->
                     <ul class="navbar-nav mr-auto">
 
                     </ul>

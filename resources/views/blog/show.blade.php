@@ -50,7 +50,7 @@
 
         {!! $post->content !!}
 
-        @include('partials.addthis')
+        @include('partials.addthis') <!-- TODO: Does not work in Brave Browser -->
 
         <div class="row">
             <div class="gap-xy-2 mt-6">

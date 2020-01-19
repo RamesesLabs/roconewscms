@@ -61,5 +61,6 @@
     <script src="{{ asset('js/page.min.js') }}"></script>
     <script src="{{ ('js/script.js') }}"></script>
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e2231a8bf14718e"></script>
+    <!-- TODO: AddThis Javascrip doesnt work in Brave -->
   </body>
 </html>
